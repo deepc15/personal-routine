@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: userservice
+  datasource:
+    url: jdbc:postgresql://localhost:5432/routine-user
+    username: postgres
+    password: admin@deep
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
