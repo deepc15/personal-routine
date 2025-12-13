@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/api/activities")
 @AllArgsConstructor
@@ -17,6 +19,12 @@ public class ActivityController {
 
     @PostMapping
     public ResponseEntity<Object> trackActivity(@RequestBody ActivityRequest request){
-        return ResponseEntity.ok(activityService.trackActivity(request));
+        try{
+            return ResponseEntity.ok(activityService.trackActivity(request));
+        } catch (Exception e) {
+            HashMap<String,Object> jsonString = new HashMap<String,Object>();
+            jsonString.put("error",e.getMessage());
+            return ResponseEntity.ok(jsonString);
+        }
     }
 }

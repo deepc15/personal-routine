@@ -26,6 +26,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/fetch-user/{userId}/validate")
+    public ResponseEntity<Object> validateUser(@PathVariable String userId) throws Exception{
+        try{
+            return ResponseEntity.ok(userService.existByUserId(userId));
+        } catch (Exception e) {
+            HashMap<String,Object> jsonString = new HashMap<String,Object>();
+            jsonString.put("error",e.getMessage());
+            return ResponseEntity.ok(jsonString);
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<Object> register(@Valid @RequestBody RegisterRequest request) throws Exception{
         try{
